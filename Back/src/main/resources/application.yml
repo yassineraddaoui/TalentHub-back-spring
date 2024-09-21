@@ -1,0 +1,49 @@
+spring:
+    datasource:
+        username: root
+        password: root
+        url: jdbc:mysql://localhost:3306/offre_emploi
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL57Dialect
+    main:
+        allow-circular-references: true
+    servlet:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: gimmework3@gmail.com
+        password: qibmqihwcagjdihi
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+
+server:
+    port: 8080
+
+#eureka:
+#    instance:
+#        prefer-ip-address: true
+#    client:
+#        fetch-registry: true
+#        register-with-eureka: true
+#        serviceUrl:
+#            defaultZone: http://eureka-server:8870/eureka
+#info:
+#    app:
+#        name: "spring-server"
+#        description: "Spring Boot Application"
+#        version: "0.1"
+#
+#endpoints:
+#    shutdown:
+#        enabled: true
