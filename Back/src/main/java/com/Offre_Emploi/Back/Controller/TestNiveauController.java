@@ -1,9 +1,9 @@
 package com.Offre_Emploi.Back.Controller;
 
-import com.Offre_Emploi.Back.Entity.Offres;
 import com.Offre_Emploi.Back.Entity.ScoreTest;
 import com.Offre_Emploi.Back.Entity.TestNiveau;
 import com.Offre_Emploi.Back.Service.TestNiveauService;
+import com.Offre_Emploi.Back.payload.TestNiveauAddRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class TestNiveauController {
     private TestNiveauService testNiveauService;
 
     @PostMapping("/add")
-    public TestNiveau addTest(@RequestBody TestNiveau testNiveau){
+    public TestNiveau addTest(@RequestBody TestNiveauAddRequest testNiveau){
         return testNiveauService.addTest(testNiveau);
     }
 

@@ -1,10 +1,8 @@
 package com.Offre_Emploi.Back.Service;
 
 import com.Offre_Emploi.Back.Entity.*;
-import com.Offre_Emploi.Back.Repository.CandidatRepository;
-import com.Offre_Emploi.Back.Repository.QuestionRepository;
-import com.Offre_Emploi.Back.Repository.ScoreRepository;
-import com.Offre_Emploi.Back.Repository.TestNiveauRepository;
+import com.Offre_Emploi.Back.Repository.*;
+import com.Offre_Emploi.Back.payload.TestNiveauAddRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,12 +13,26 @@ import java.util.List;
 @AllArgsConstructor
 public class TestNiveauService {
 
+    private final UserRepository userRepository;
     private TestNiveauRepository testNiveauRepository;
     private QuestionRepository questionRepository;
     private ScoreRepository scoreRepository;
     private CandidatRepository candidatRepository;
 
-    public TestNiveau addTest(TestNiveau testNiveau){
+    public TestNiveau addTest(TestNiveauAddRequest testNiveauRequest){
+        //refactor this
+        var testNiveau = TestNiveau.builder()
+                .user(userRepository.findById(Long.parseLong(testNiveauRequest.getUser_id())).orElseThrow())
+                .scoreTests(testNiveauRequest.getScoreTests())
+                .duree(Float.parseFloat(testNiveauRequest.getDuree()))
+                .titre(testNiveauRequest.getTitre())
+                .nb_questions(testNiveauRequest.getNb_questions())
+                .score_min(testNiveauRequest.getScore_min())
+                .questions(testNiveauRequest.getQuestions())
+                .offres(testNiveauRequest.getOffres())
+                .build();
+        System.out.println(testNiveau);
+
         return testNiveauRepository.save(testNiveau);
     }
 
