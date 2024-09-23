@@ -1,8 +1,11 @@
 package com.Offre_Emploi.Back.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,5 +31,11 @@ public class TestNiveau {
     private List<ScoreTest> scoreTests = new ArrayList<>();
     @ManyToMany(mappedBy = "testNiveaus",fetch = FetchType.EAGER)
     private List<Offres> offres = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private User user;
+
 
 }
