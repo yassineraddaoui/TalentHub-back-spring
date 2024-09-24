@@ -1,13 +1,16 @@
 package com.Offre_Emploi.Back.Entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Recruteur extends User{
 
     private int num_tel;
@@ -22,6 +25,10 @@ public class Recruteur extends User{
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private Set<TestNiveau> testNiveaus = new HashSet<>();
+    private List<TestNiveau> testNiveaus ;
+
+    public String toString() {
+        return "recruteur";
+    }
 }
 

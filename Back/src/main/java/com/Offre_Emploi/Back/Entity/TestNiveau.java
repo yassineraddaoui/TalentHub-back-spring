@@ -1,10 +1,7 @@
 package com.Offre_Emploi.Back.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter 
+@Setter
 public class TestNiveau {
 
     @Id
@@ -41,5 +39,7 @@ public class TestNiveau {
     @JsonIgnore
     private User user;
 
-
+    public String toString() {
+        return "User";
+    }
 }

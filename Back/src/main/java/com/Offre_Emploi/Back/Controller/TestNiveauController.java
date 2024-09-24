@@ -5,6 +5,8 @@ import com.Offre_Emploi.Back.Entity.TestNiveau;
 import com.Offre_Emploi.Back.Service.TestNiveauService;
 import com.Offre_Emploi.Back.payload.TestNiveauAddRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +18,11 @@ public class TestNiveauController {
     @Autowired
     private TestNiveauService testNiveauService;
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<TestNiveau>> getTestNiveauxUser(@PathVariable("id") Long id){
+        var tests = testNiveauService.getTestNiveauxUser(id);
+        return new ResponseEntity<>(tests, HttpStatus.OK);
+    }
     @PostMapping("/add")
     public TestNiveau addTest(@RequestBody TestNiveauAddRequest testNiveau){
         return testNiveauService.addTest(testNiveau);

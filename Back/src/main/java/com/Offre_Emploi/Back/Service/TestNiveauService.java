@@ -19,6 +19,11 @@ public class TestNiveauService {
     private ScoreRepository scoreRepository;
     private CandidatRepository candidatRepository;
 
+    public List<TestNiveau> getTestNiveauxUser(Long userId) {
+        return  testNiveauRepository.findTestNiveauxByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+    }
     public TestNiveau addTest(TestNiveauAddRequest testNiveauRequest){
         //refactor this
         var testNiveau = TestNiveau.builder()
@@ -31,7 +36,6 @@ public class TestNiveauService {
                 .questions(testNiveauRequest.getQuestions())
                 .offres(testNiveauRequest.getOffres())
                 .build();
-        System.out.println(testNiveau);
 
         return testNiveauRepository.save(testNiveau);
     }
@@ -52,7 +56,7 @@ public class TestNiveauService {
     }
 
     public TestNiveau findTestById(Long id){
-        return testNiveauRepository.findById(id).get();
+        return testNiveauRepository.findById(id).orElseThrow();
     }
 
     @Transactional
@@ -73,8 +77,8 @@ public class TestNiveauService {
     public void deleteTest(Long id){
         TestNiveau testNiveau = testNiveauRepository.findById(id).orElse(null);
         List<Offres> offres = testNiveau.getOffres();
-        for (Offres offres1:offres) {
-            offres1.getTestNiveaus().remove(testNiveau);
+        for (Offres offre:offres) {
+            offre.getTestNiveaus().remove(testNiveau);
         }
         testNiveauRepository.deleteById(id);
     }

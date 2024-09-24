@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -22,6 +23,8 @@ public class User {
     private String role;
     private LocalDate dateinscription = LocalDate.now();
 
+    @OneToMany
+    private List<TestNiveau> testNiveaux;
     @Column(unique = true)
     private String mail;
 }
