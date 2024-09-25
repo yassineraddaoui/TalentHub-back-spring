@@ -114,12 +114,7 @@ public class CandidatService {
     }
 
 
-    @Transactional
-    public Candidat updateCandidatLm(Candidat candidat) {
-        Candidat candidatUpdate = candidatRepository.findById(candidat.getId()).orElse(null);
-        candidatUpdate.setLettre_motivation(candidat.getLettre_motivation());
-        return candidatUpdate;
-    }
+
 
     @Transactional
     public Candidat updateCandidatNotification(Long id) {

@@ -48,11 +48,6 @@ public class PostulationService {
         return postulationUpdate;
     }
 
-    @Transactional
-    public Postulation updatePostulationLM(Postulation postulation) {
-        Postulation postulationUpdate = postulationRepository.findById(postulation.getId()).orElse(null);
-        postulationUpdate.setLettre_motivation(postulation.getLettre_motivation());
-        return postulationUpdate;
-    }
+
 
 }

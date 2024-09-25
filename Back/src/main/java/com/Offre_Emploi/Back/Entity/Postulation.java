@@ -17,7 +17,4 @@ public class Postulation {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private File cv;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "lettre_id", referencedColumnName = "id")
-    private File lettre_motivation;
 }

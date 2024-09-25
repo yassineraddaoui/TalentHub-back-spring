@@ -21,9 +21,6 @@ public class Candidat extends User{
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private File cv;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "lettre_id", referencedColumnName = "id")
-    private File lettre_motivation;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "condidat_Competance",

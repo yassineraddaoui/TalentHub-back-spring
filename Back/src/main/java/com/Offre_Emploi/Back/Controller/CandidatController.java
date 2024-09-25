@@ -63,8 +63,7 @@ public class CandidatController {
         try {
             File images = uploadFile(file);
             candidat.setImage(images);
-            Candidat newCandidat = candidatService.addCondidat(candidat);
-            return newCandidat;
+            return candidatService.addCondidat(candidat);
         }catch (Exception e){
             System.out.println(e.getMessage());
             return null;
@@ -110,18 +109,7 @@ public class CandidatController {
         }
     }
 
-    @PutMapping(value = "/update/lm", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Candidat updateCandidatLm(@RequestPart("user") Candidat candidat,
-                                     @RequestPart("lm") MultipartFile file) {
-        try {
-            File lm = uploadFile(file);
-            candidat.setLettre_motivation(lm);
-            return candidatService.updateCandidatLm(candidat);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
+
 
     @GetMapping("/competance/{candidatId}/{competanceId}")
     public ResponseEntity<Candidat> addCompetanceToCandidat(@PathVariable("candidatId") long candidatId, @PathVariable("competanceId") long competanceId) {

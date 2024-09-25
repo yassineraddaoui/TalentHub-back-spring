@@ -60,19 +60,6 @@ public class PostulationController {
         return postulationService.updatePostulationCVUserCV(postulation);
     }
 
-    @PutMapping(value = "/update/lm", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Postulation updatePostulationLm(@RequestPart("postulation") Postulation postulation,
-                                           @RequestPart("lm") MultipartFile file) {
-        try {
-            File lm = uploadFile(file);
-            postulation.setLettre_motivation(lm);
-            return postulationService.updatePostulationLM(postulation);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
     public File uploadFile(MultipartFile multipartFiles) throws IOException {
         File file = new File(
                 multipartFiles.getOriginalFilename(),
