@@ -46,15 +46,12 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
 
-      - name: unit tests
+      - name: Run unit tests
         run: mvn -B test --file pom.xml
 
-          
       - name: Build with Maven
-        run: |
-            mvn clean
-            mvn -B package --file pom.xml
-            
+        run: mvn clean package --file pom.xml
+
       - name: Build Docker image
         run: docker build -t my-spring-boot-app .
 
@@ -62,7 +59,8 @@ jobs:
         run: |
           docker run -d --name spring-boot-app \
           -p 8080:8080 \
-          --env SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/offre_emploi \  
+          --env SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/offre_emploi \
           --env SPRING_DATASOURCE_USERNAME=user \
-          --env SPRING_DATASOURCE_PASSWORD=password \  
-          --env SPRING_MAIL_HOST=smtp.gmail.com 
+          --env SPRING_DATASOURCE_PASSWORD=password \
+          --env SPRING_MAIL_HOST=smtp.gmail.com \
+          my-spring-boot-app
