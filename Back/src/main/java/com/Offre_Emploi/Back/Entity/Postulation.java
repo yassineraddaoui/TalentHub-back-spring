@@ -1,5 +1,6 @@
 package com.Offre_Emploi.Back.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -17,4 +18,7 @@ public class Postulation {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private File cv;
+    @ManyToOne
+    @JsonIgnore
+    private Candidat candidat;
 }

@@ -33,9 +33,8 @@ public class Candidat extends User{
             joinColumns =  @JoinColumn(name = "user_id"),
             inverseJoinColumns =  @JoinColumn(name = "formation_id"))
     private Set<Formations> formations = new HashSet<>();
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "candidat_id", referencedColumnName = "id")
-    private Set<Postulation> postulations = new HashSet<>();
+    @OneToMany(mappedBy = "candidat", cascade = CascadeType.ALL)
+    private List<Postulation> postulations =new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Notification> notification = new ArrayList<>();

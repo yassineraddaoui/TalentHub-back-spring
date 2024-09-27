@@ -2,6 +2,7 @@ package com.Offre_Emploi.Back.Service;
 
 import com.Offre_Emploi.Back.Entity.Postulation;
 import com.Offre_Emploi.Back.Repository.CandidatRepository;
+import com.Offre_Emploi.Back.Repository.OffrePriveRepository;
 import com.Offre_Emploi.Back.Repository.PostulationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class PostulationService {
     private PostulationRepository postulationRepository;
     @Autowired
     private CandidatRepository candidatRepository;
+    @Autowired
+    private NotificationService notificationService;
+    @Autowired
+    private OffrePriveRepository offrePriveRepository;
 
     public Postulation addPostulation(Postulation postulation){
         return postulationRepository.save(postulation);
@@ -31,6 +36,10 @@ public class PostulationService {
     public Postulation updatePostulation(Postulation postulation) {
         Postulation postulationUpdate = postulationRepository.findById(postulation.getId()).orElse(null);
         postulationUpdate.setDecision_recruteur(postulation.getDecision_recruteur());
+        var offre = offrePriveRepository.getOffresByPostulationsId(postulation.getId());
+        var candidat = postulationUpdate.getCandidat();
+        System.out.println("notification is sent");
+        notificationService.sendNotificationApplicationStatus(offre,candidat);
         return postulationUpdate;
     }
 

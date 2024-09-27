@@ -126,4 +126,13 @@ public class NotificationService {
             }
         }
     }
+    public void sendNotificationApplicationStatus(Offres offre, Candidat candidat) {
+        Notification notification = new Notification();
+        notification.setVu(false);
+        notification.setDate(LocalDate.now());
+        notification.setOffres(offre);
+        notification.setCandidat(candidat);
+        notificationRepository.save(notification);
+        System.out.println("notification is sent");
+    }
 }

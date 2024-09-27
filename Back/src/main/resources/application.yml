@@ -4,13 +4,8 @@ spring:
         password: root
         url: jdbc:mysql://localhost:3306/offre_emploi
     jpa:
-        show-sql: true
         hibernate:
             ddl-auto: update
-        properties:
-            hibernate:
-                format_sql: true
-                dialect: org.hibernate.dialect.MySQL57Dialect
     main:
         allow-circular-references: true
     servlet:
