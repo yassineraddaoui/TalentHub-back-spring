@@ -47,7 +47,7 @@ jobs:
           distribution: 'adopt'
           
       - name: Build with Maven
-        run: cd ~/.m2/repository && mvn clean package
+        run: mvn --batch-mode --update-snapshots package
 
       - name: Build Docker image
         run: docker build -t my-spring-boot-app .
