@@ -14,16 +14,6 @@ services:
       - mysql_data:/var/lib/mysql
     networks:
       - app-network
-  
-  eureka-server:
-    image: eureka
-    container_name: eureka-server
-    ports:
-      - "8870:8870"
-    networks:
-      - app-network
-    depends_on:
-      - db-service
 
   spring-server:
     image: spring-server
@@ -38,25 +28,13 @@ services:
       - app-network
     depends_on:
       - db-service
-      - eureka-server
-  
-  auth-service:
-    image: auth-server
-    container_name: auth-service
+
+  extractor-service:
+    image: job-extractor
     ports:
-      - "8000:8000"
+      - 8000:8000
     networks:
       - app-network
-    depends_on:
-      - db-service
-      - eureka-server
-    environment:
-      - DEBUG=1
-      - DB_HOST=db-service
-      - DB_PORT=3306
-      - DB_NAME=offre_emploi
-      - DB_USER=root
-      - DB_PASSWORD=root
 
 volumes:
   mysql_data:
