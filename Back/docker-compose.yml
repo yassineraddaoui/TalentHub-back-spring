@@ -36,6 +36,15 @@ services:
     networks:
       - app-network
 
+  front-service:
+    image: job-front
+    ports:
+      - "80:80"
+    networks:
+      app-network:
+    depends_on:
+      - spring-server
+      - extractor-service
 volumes:
   mysql_data:
 
