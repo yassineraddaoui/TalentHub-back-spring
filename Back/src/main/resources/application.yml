@@ -2,10 +2,18 @@ spring:
     datasource:
         username: user
         password: password
-        url: jdbc:mysql://mysql-container:3306/offre_emploi?createDatabaseIfNotExist=true&useSSL=true
+        url: jdbc:mysql://localhost:3306/offre_emploi?createDatabaseIfNotExist=true&useSSL=true
     jpa:
+        database-platform: org.hibernate.dialect.MySQL55Dialect
         hibernate:
             ddl-auto: update
+            show-sql: true
+            format-sql: true
+            type: info
+            use-sql-comments: true
+            properties:
+                hibernate.use_sql_comments: true
+                hibernate.format_sql: true
     main:
         allow-circular-references: true
     servlet:
