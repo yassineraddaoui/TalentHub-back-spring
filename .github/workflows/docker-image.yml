@@ -78,4 +78,4 @@ jobs:
           --env SPRING_DATASOURCE_USERNAME=user \
           --env SPRING_DATASOURCE_PASSWORD=password \
           --env SPRING_MAIL_HOST=smtp.gmail.com \
-          my-spring-boot-app
+          emploi-back
