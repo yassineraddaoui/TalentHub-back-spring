@@ -32,18 +32,22 @@ jobs:
               sudo usermod -a -G docker ec2-user
             fi
 
-            docker rm -f mysql-container || true
-            
+            # Create a custom Docker network
             docker network create my_network
 
+            # Remove old MySQL container if exists
+            docker rm -f mysql-container || true
+
+            # Run the MySQL container with volume for persistent data
             docker run -d --name mysql-container \
               -e MYSQL_ROOT_PASSWORD=root \
               -e MYSQL_DATABASE=offre_emploi \
               -e MYSQL_USER=user \
-              -v mysql-data:/var/lib/mysql \
-              --network my_network
               -e MYSQL_PASSWORD=password \
-              -p 3306:3306 mysql:latest
+              -v mysql-data:/var/lib/mysql \
+              --network my_network \
+              -p 3306:3306 \
+              mysql:latest
 
             # Remove old backend container if exists
             docker rm -f emploi-back || true
@@ -54,10 +58,10 @@ jobs:
             # Run the backend container
             docker run -d --name emploi-back \
               -p 8080:8080 \
-              --network my_network
+              --network my_network \
               --env SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/offre_emploi \
               --env SPRING_DATASOURCE_USERNAME=user \
               --env SPRING_DATASOURCE_PASSWORD=password \
               --env SPRING_MAIL_HOST=smtp.gmail.com \
-              emploi-back
+              ${{ secrets.DOCKER_USERNAME }}/emploi-back:latest
           EOF
