@@ -45,15 +45,17 @@ jobs:
             else
               echo "MySQL is running."
             fi
-
-            # Pull the latest backend image from Docker Hub
-            docker pull ${{ secrets.DOCKER_USERNAME }}/emploi-back:latest
-
-            # Stop and remove the existing backend container if running
             if [ "$(docker ps -q -f name=emploi-back)" ]; then
               docker stop emploi-back
               docker rm emploi-back
             fi
+
+
+            
+            # Pull the latest backend image from Docker Hub
+            docker pull ${{ secrets.DOCKER_USERNAME }}/emploi-back:latest
+
+           
 
             # Run the backend container
             docker run -d --name emploi-back \
