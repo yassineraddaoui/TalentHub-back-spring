@@ -32,30 +32,22 @@ jobs:
               sudo usermod -a -G docker ec2-user
             fi
 
-            # Check if MySQL is running
-            if ! mysqladmin ping -h mysql --silent; then
-              echo "MySQL is not running. Starting MySQL container..."
-              # If MySQL is not running, start the MySQL container
-              docker run -d --name mysql-container \
-                -e MYSQL_ROOT_PASSWORD=root \
-                -e MYSQL_DATABASE=offre_emploi \
-                -e MYSQL_USER=user \
-                -e MYSQL_PASSWORD=password \
-                -p 3306:3306 mysql:latest
-            else
-              echo "MySQL is running."
-            fi
-            if [ "$(docker ps -q -f name=emploi-back)" ]; then
-              docker stop emploi-back
-              docker rm emploi-back
-            fi
+            # Remove MySQL container if exists
+            docker rm -f mysql-container || true
 
+            # Run MySQL container
+            docker run -d --name mysql-container \
+              -e MYSQL_ROOT_PASSWORD=root \
+              -e MYSQL_DATABASE=offre_emploi \
+              -e MYSQL_USER=user \
+              -e MYSQL_PASSWORD=password \
+              -p 3306:3306 mysql:latest
 
-            
+            # Remove old backend container if exists
+            docker rm -f emploi-back || true
+
             # Pull the latest backend image from Docker Hub
             docker pull ${{ secrets.DOCKER_USERNAME }}/emploi-back:latest
-
-           
 
             # Run the backend container
             docker run -d --name emploi-back \
