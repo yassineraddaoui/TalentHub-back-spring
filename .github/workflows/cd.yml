@@ -59,7 +59,7 @@ jobs:
             docker run -d --name emploi-back \
               -p 8080:8080 \
               --network my_network \
-              --env SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/offre_emploi
+              --env SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/offre_emploi \
               --env SPRING_DATASOURCE_USERNAME=user \
               --env SPRING_DATASOURCE_PASSWORD=password \
               --env SPRING_MAIL_HOST=smtp.gmail.com \
