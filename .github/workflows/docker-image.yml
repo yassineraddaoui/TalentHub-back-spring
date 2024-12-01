@@ -18,8 +18,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: offre_emploi  
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
         ports:
           - 3306:3306
         options: >-
@@ -75,7 +75,7 @@ jobs:
           docker run -d --name spring-boot-app \
           -p 8080:8080 \
           --env SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/offre_emploi \
-          --env SPRING_DATASOURCE_USERNAME=root \
-          --env SPRING_DATASOURCE_PASSWORD=root \
+          --env SPRING_DATASOURCE_USERNAME=user \
+          --env SPRING_DATASOURCE_PASSWORD=password \
           --env SPRING_MAIL_HOST=smtp.gmail.com \
           emploi-back
