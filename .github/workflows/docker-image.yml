@@ -1,4 +1,4 @@
-name: Build and Run Spring Boot App
+name: CI
 
 on:
   push:
